@@ -13,8 +13,10 @@ void speaker(){
 }
 
 void* speakerAnswer(){
-	answerStart();
-	answerDone();
+	while(1){
+		answerStart();
+		answerDone();
+	}
 }
 void reporter(int id){
 
@@ -38,7 +40,7 @@ void questionDone(int id){
 	printk("Reporter %d is satisfied.",id);
 }
 int main(int argc, char* argv[]){
-	
+
   	pthread_barrier_init(&begin, NULL, 2);
   	pthread_barrier_init(&stop, NULL, 2);
 
