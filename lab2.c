@@ -19,21 +19,21 @@ void* speakerAnswer(){
 void reporter(int id){
 
 }
-void answerStart(){
-
+void answerStart(int id){
+	printk("Speaker starts to answer question for reporter %d\n",id);
 }
-void answerDone(){
-
+void answerDone(int id){
+	printk("Speaker is done with answer for reporter %d.\n",id);
 }
-void enterConferenceRoom(){
-
+void enterConferenceRoom(int id){
+	printk("Reporter %d enters the conference room",id);
 }
-void leaveConferenceRoom(){
-
+void leaveConferenceRoom(int id){
+	printk("Reporter %d leaves the conference room",id);
 }
-void questionStart(){
-
+void questionStart(int id){
+	printk("Reporter %d asks a question.",id);
 }
-void questionDone(){
-
+void questionDone(int id){
+	printk("Reporter %d is satisfied.",id);
 }
