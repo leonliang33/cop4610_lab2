@@ -39,5 +39,8 @@ void questionDone(int id){
 }
 int main(int argc, char* argv[]){
 	
+  	pthread_barrier_init(&begin, NULL, 2);
+  	pthread_barrier_init(&stop, NULL, 2);
+
 	speaker();
 }
