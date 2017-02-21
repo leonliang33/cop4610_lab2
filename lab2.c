@@ -37,3 +37,7 @@ void questionStart(int id){
 void questionDone(int id){
 	printk("Reporter %d is satisfied.",id);
 }
+int main(int argc, char* argv[]){
+	
+	speaker();
+}
