@@ -28,11 +28,14 @@ void *Speaker(){
 	}
 }
 
-void *Reporter(int *arg){
-	int id = *arg - 1;
+void *Reporter(void* arg){
+	int id = (int)arg - 1;
 	int questions = (id%4)+2;
 	EnterConferenceRoom(id);
 	for (questions; questions > 0; questions--){
+		if(reporters_in_room > 1){
+			usleep(1000);
+		}
 		pthread_mutex_lock(&asking); //no reporter asks until previous is answered
 		active_id = id;
 		QuestionStart(id);
@@ -122,7 +125,7 @@ int main (int argc, char *argv[]){
 			exit(EXIT_FAILURE);
 		}
 		*arg = i;
-		pthread_create(&threads[i], NULL, Reporter, arg);
+		pthread_create(&threads[i], NULL, Reporter, (void *) i);
 	}
 	pthread_barrier_wait(&barrier);
 	return 0;
