@@ -10,7 +10,7 @@ int RAND_MAX = 6;
 void *SimpleThread(void *threadID) {
 	int num, val, ID = (int)threadID;
 	for(num = 0; num < 20; num++) {
-		if (random() > RAND_MAX / 2){usleep(10);}
+		// if (random() > RAND_MAX / 2){usleep(10);}
 		#ifdef PTHREAD_SYNC        
 		/* include your synchronization-related code here */							
 			pthread_mutex_lock(&lock);
