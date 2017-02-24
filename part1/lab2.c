@@ -1,6 +1,7 @@
 #include <pthread.h>
 #include <stdio.h>
 #include "test_cajigas_liang_pinales.h"
+#define PTHREAD_SYNC
 
 pthread_mutex_t lock; //new
 pthread_barrier_t barrier; //new
