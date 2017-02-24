@@ -1,6 +1,3 @@
-/*Implementation using locks and pthread_cond_wait(2).
-This is a mess, probably some temporary testing stuff/failed ideas I forgot to take out,
-and probably not the best solution, but it works and I need to get some sleep.*/
 #include <stdio.h>
 #include <pthread.h>
 #include <stdlib.h>
@@ -11,7 +8,6 @@ pthread_mutex_t asking;
 pthread_mutex_t room;
 pthread_cond_t question;
 pthread_cond_t answer;
-pthread_cond_t full;
 pthread_barrier_t barrier;
 int reporters_in_room;
 int done = 0;
@@ -87,7 +83,6 @@ void LeaveConferenceRoom(int rid){
 	pthread_mutex_lock(&room);
 	printf("Reporter %d leaves the conference room.\n", rid);
 	reporters_in_room--;
-	pthread_cond_signal(&full);
 	done++;
 	pthread_mutex_unlock(&room);
 }
