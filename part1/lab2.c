@@ -47,7 +47,7 @@ int main (int argc, char *argv[]){
 
         printf("shared variable = %d\n" , SharedVariable);
 
-	printf("%d\n",syscall(__NR_cajigas_liang_pinales));
+	printf("%ld\n",syscall(__NR_cajigas_liang_pinales));
         pthread_exit(NULL);
 }
 

@@ -107,7 +107,7 @@ int getInRoom(){
 }
 
 int main (int argc, char *argv[]){
-	
+
 	if (argc != 3){
 		fprintf(stderr, "usage: a.out <integer value> <integer value>\n");
 		return -1;
@@ -120,7 +120,7 @@ int main (int argc, char *argv[]){
 	pthread_create(&threads[0], NULL, Speaker, NULL);
 	int i=1;
 	for (i; i < numReporters+1; i++){
-		int *arg = malloc(sizeof(*arg));  //Sol. of using malloc to avoid conflicts from SO /19232957   Not sure why it still gets a warning.
+		int *arg = malloc(sizeof(*arg));
 		if (arg == NULL){
 			fprintf(stderr, "Unable to allocate memory.\n");
 			exit(EXIT_FAILURE);
