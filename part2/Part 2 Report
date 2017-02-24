@@ -1,0 +1,21 @@
+Program takes the number of reporters and the capacity of the conference room as command line arguments.  Main initializes an array of
+threads, one thread for each reporter plus one for the speaker, and a Pthread barrier.  Main then creates the appropriate number of
+Pthreads to run the Speaker and Reporter functions.  Main then calls pthread_barrier_wait, which will wait for the Reporter threads,
+and then returns.
+
+The Speaker thread runs a loop which waits for a signal (question) from a reporter, then locks the "speaking" mutex as it answers the
+question and signals the waiting Reporter thread.  The Speaker may get stuck waiting for a question after all Reporters have finished,
+but this is not an issue as main will see the Reporters finish and end the process.
+
+Reporter threads begin by attempting to enter the conference room.  If the room is at capacity, they enter a loop in which they sleep
+for ten milliseconds.  This is to ensure that the operating system shifts to a different thread rather than having a single thread
+constantly attempting to enter a room that other reporters get no chance to leave.  Once the reporter enters the room, it will attempt
+to obtain a lock the "asking" mutex, check whether the Speakeris waiting for a question, and ask its question.  If the Speaker is not
+ready, the Reporter once again sleeps for a brief time.  After asking its question, the Reporter signals the waiting Speaker thread and
+waits for a response.  Once the response is received it unlocks the "asking" mutex and, if it hasn't asked all of its questions, sleeps
+for one millisecond before asking its next one. This sleep reduces the likelihood that one reporter will ask all of its questions in
+succession, forcing the others to wait until it leaves.  Once a Reporter has asked all of its questions, it calls pthread_barrier_wait
+to tell the main function that it has finished.
+
+All references to shared variables are treated as critical sections and protected by mutex locks.  Checks to global variables within loop
+conditions instead call helper functions getDone() and getInRoom() which enforce this.
