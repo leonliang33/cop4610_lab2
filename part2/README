@@ -1,0 +1,6 @@
+Instructions for running part 2:
+Compile:
+     gcc -pthread Conference.c
+
+Run:
+     ./a.out [NUMBER OF REPORTERS] [ROOM SIZE]

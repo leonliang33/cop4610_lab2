@@ -107,14 +107,15 @@ int getInRoom(){
 }
 
 int main (int argc, char *argv[]){
-	numReporters = atoi(argv[1]);
-	roomCapacity = atoi(argv[2]);
-	pthread_t threads[numReporters + 1]; //1 thread per reporter + speaker
-	pthread_barrier_init(&barrier, NULL, numReporters+1);
+	
 	if (argc != 3){
 		fprintf(stderr, "usage: a.out <integer value> <integer value>\n");
 		return -1;
 	}
+	numReporters = atoi(argv[1]);
+	roomCapacity = atoi(argv[2]);
+	pthread_t threads[numReporters + 1]; //1 thread per reporter + speaker
+	pthread_barrier_init(&barrier, NULL, numReporters+1);
 
 	pthread_create(&threads[0], NULL, Speaker, NULL);
 	int i=1;
