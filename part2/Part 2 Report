@@ -10,7 +10,7 @@ but this is not an issue as main will see the Reporters finish and end the proce
 Reporter threads begin by attempting to enter the conference room.  If the room is at capacity, they enter a loop in which they sleep
 for ten milliseconds.  This is to ensure that the operating system shifts to a different thread rather than having a single thread
 constantly attempting to enter a room that other reporters get no chance to leave.  Once the reporter enters the room, it will attempt
-to obtain a lock the "asking" mutex, check whether the Speakeris waiting for a question, and ask its question.  If the Speaker is not
+to obtain a lock the "asking" mutex, check whether the Speaker is waiting for a question, and ask its question.  If the Speaker is not
 ready, the Reporter once again sleeps for a brief time.  After asking its question, the Reporter signals the waiting Speaker thread and
 waits for a response.  Once the response is received it unlocks the "asking" mutex and, if it hasn't asked all of its questions, sleeps
 for one millisecond before asking its next one. This sleep reduces the likelihood that one reporter will ask all of its questions in

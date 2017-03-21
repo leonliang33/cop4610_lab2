@@ -1,7 +1,6 @@
 #include <pthread.h>
 #include <stdio.h>
 #include "test_cajigas_liang_pinales.h"
-#define PTHREAD_SYNC
 
 pthread_mutex_t lock; //new
 pthread_barrier_t barrier; //new
@@ -12,8 +11,8 @@ void *SimpleThread(void *threadID) {
 	int num, val, ID = (int)threadID;
 	for(num = 0; num < 20; num++) {
 		// if (random() > RAND_MAX / 2){usleep(10);}
-		#ifdef PTHREAD_SYNC        
-		/* include your synchronization-related code here */							
+		#ifdef PTHREAD_SYNC
+		/* include your synchronization-related code here */
 			pthread_mutex_lock(&lock);
 		#endif
 		val = SharedVariable;
@@ -51,4 +50,3 @@ int main (int argc, char *argv[]){
 	printf("%ld\n",syscall(__NR_cajigas_liang_pinales));
         pthread_exit(NULL);
 }
-
