@@ -316,6 +316,12 @@ static void *slob_page_alloc(struct slob_page *sp, size_t size, int align)
 }
 
 /*
+	COP4610 LAB 3
+*/
+long slob_free_arr[100];
+long slob_memory_arr[100];
+int counter = 0;
+/*
  * slob_alloc: entry point into the slob allocator.
  */
 static void *slob_alloc(size_t size, gfp_t gfp, int align, int node)
@@ -325,6 +331,8 @@ static void *slob_alloc(size_t size, gfp_t gfp, int align, int node)
 	struct list_head *slob_list;
 	slob_t *b = NULL;
 	unsigned long flags;
+
+	long free_amt=0;
 
 	if (size < SLOB_BREAK1)
 		slob_list = &free_slob_small;
@@ -336,6 +344,7 @@ static void *slob_alloc(size_t size, gfp_t gfp, int align, int node)
 	spin_lock_irqsave(&slob_lock, flags);
 	/* Iterate through each partially free page, try to find room */
 	list_for_each_entry(sp, slob_list, list) {
+		free_amt += sp->units;
 #ifdef CONFIG_NUMA
 		/*
 		 * If there's a node specification, search for a partial
@@ -375,6 +384,12 @@ static void *slob_alloc(size_t size, gfp_t gfp, int align, int node)
 		spin_lock_irqsave(&slob_lock, flags);
 		sp->units = SLOB_UNITS(PAGE_SIZE);
 		sp->free = b;
+
+		slob_memory_arr[counter]=size;
+		slob_free_arr[counter]=free_amt;
+		counter++;
+		counter=counter%100;
+
 		INIT_LIST_HEAD(&sp->list);
 		set_slob(b, SLOB_UNITS(PAGE_SIZE), b + SLOB_UNITS(PAGE_SIZE));
 		set_slob_page_free(sp, slob_list);
@@ -699,10 +714,10 @@ void __init kmem_cache_init_late(void)
 }
 
 asmlinkage long sys_get_slob_amt_claimed(void){
-
+	struct slob_page *sp;
 }
 
 asmlinkage long sys_get_slob_amt_free(void){
-	
+	struct slob_page *sp;
+	printf(*sp->units);
 }
-
