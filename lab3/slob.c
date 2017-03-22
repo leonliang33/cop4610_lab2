@@ -714,10 +714,13 @@ void __init kmem_cache_init_late(void)
 }
 
 asmlinkage long sys_get_slob_amt_claimed(void){
-	struct slob_page *sp;
+	for(int i=0;i<100;i++){
+		printk(slob_memory_arr[i]);
+	}
 }
 
 asmlinkage long sys_get_slob_amt_free(void){
-	struct slob_page *sp;
-	printf(*sp->units);
+	for(int i=0;i<100;i++){
+		printk(slob_free_arr[i]);
+	}
 }
