@@ -56,7 +56,7 @@
  * the freelist will only be done so on pages residing on the same node,
  * in order to prevent random node placement.
  */
-
+#include <linux/linkage.h>
 #include <linux/kernel.h>
 #include <linux/slab.h>
 #include <linux/mm.h>
@@ -714,13 +714,17 @@ void __init kmem_cache_init_late(void)
 }
 
 asmlinkage long sys_get_slob_amt_claimed(void){
+	long total = 0;
 	for(int i=0;i<100;i++){
-		printk(slob_memory_arr[i]);
+		total += slob_memory_arr[i];
 	}
+	return total;
 }
 
 asmlinkage long sys_get_slob_amt_free(void){
+	long total = 0;
 	for(int i=0;i<100;i++){
-		printk(slob_free_arr[i]);
+		total+=slob_free_arr[i];
 	}
+	return total;
 }
