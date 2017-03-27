@@ -718,7 +718,7 @@ asmlinkage long sys_get_slob_amt_claimed(void){
 	for(int i=0;i<100;i++){
 		total += slob_memory_arr[i];
 	}
-	return total;
+	return total/100;
 }
 
 asmlinkage long sys_get_slob_amt_free(void){
@@ -726,5 +726,5 @@ asmlinkage long sys_get_slob_amt_free(void){
 	for(int i=0;i<100;i++){
 		total+=slob_free_arr[i];
 	}
-	return total;
+	return total/100;
 }
