@@ -1,0 +1,5 @@
+The fragmentation we are getting from a first fit algorithm:
+Amount Free | Amount claimed
+22085165       162100
+20975460       174504
+20303677       184212
