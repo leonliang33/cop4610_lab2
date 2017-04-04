@@ -1,0 +1,22 @@
+From a first fit algorithm:
+Amount Free | Amount claimed
+583584         145
+606102         175
+
+From Best-Fit Algorithm:
+Amount Free    | Amount claimed
+197409              132
+197978              136
+
+We can see from this that the fragmentation from Best fit is less than one from first fit algorithm.
+The amount claimed is the same on both however the amount free on first fit is significantly larger than
+the best fit algorithm.
+However one downside to this is that best-fit would take more time and took longer than first-fit.
+
+WORK RESPONSIBILITY:
+Leon Liang - Part 1-4 and Debugging for part 5
+Brandon Cajigas - Part 5 best fit algorithm and slob allocation algorithm
+Joannier Pinales - Part 5 slob_page_alloc algorithm and helped best fit algorithm
+
+TESTING OUR CODE:
+you can test our code by compiling simpleprogram.c
