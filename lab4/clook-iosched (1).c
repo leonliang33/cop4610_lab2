@@ -1,6 +1,9 @@
 /*
  * elevator clook
  */
+/*COP4610
+Changed clook_add_request to insert new requests into the circular queue in sorted order, and to print when a request is added.
+Changed clook_dispatch to print when a request it dispatched.*/
 #include <linux/blkdev.h>
 #include <linux/elevator.h>
 #include <linux/bio.h>
@@ -46,6 +49,8 @@ static void clook_add_request(struct request_queue *q, struct request *rq)
 	struct clook_data *nd = q->elevator->elevator_data;
 	struct list_head *cur = NULL;
 	list_for_each(cur, &nd->queue) {
+	
+	//When next entry is greater than new, break to insert new.
 		if(blk_rq_pos(list_entry(cur, struct request, queuelist)) > blk_rq_pos(rq))
 		{
 			break;
